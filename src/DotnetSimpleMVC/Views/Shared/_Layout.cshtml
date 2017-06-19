@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+	<title>The World - @ViewBag.Title</title>
+	<meta charset="utf-8" />
+
+	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="~/lib/bootswatch/spacelab/bootstrap.min.css"/>
+	<link rel="stylesheet" href="~/lib/font-awesome/css/font-awesome.min.css"/>
+	<link rel="stylesheet" href="~/css/site.css" />
+
+</head>
+
+<body>
+
+	<div id="sidebar">
+		<img src="~/img/git-logo.png" alt="headshot" class="headshot" />
+		<span>GitHub</span>
+		<ul class="nav">
+			<li class="active"><a asp-action="Index">Home</a></li>
+			<li><a asp-action="About">About</a></li>
+			<li><a asp-action="Contact">Contact</a></li>
+		</ul>
+	</div>
+
+	<div id="wrapper">
+		<div id="main">
+			<div>
+				<button class="btn btn-primary btn-sm" id="sidebarToggle">
+					<i class="fa fa-angle-left"></i>
+				</button>
+			</div>
+
+			@RenderBody()
+
+		</div>
+		<div id="footer">
+			<p class="text-primary">&copy; 2017 The World Ltd.</p>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="~/lib/jquery/dist/jquery.min.js"></script>
+	<script type="text/javascript" src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="~/js/site.js"></script>
+
+	@RenderSection("scripts", false)
+
+</body>
+
+</html>
