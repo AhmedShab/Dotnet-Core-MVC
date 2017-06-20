@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DotnetSimpleMVC.Models;
 using DotnetSimpleMVC.Services;
 using DotnetSimpleMVC.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -14,16 +15,19 @@ namespace DotnetSimpleMVC.Controllers.Web
 	{
 		private IMailService _mailService;
 		private IConfigurationRoot _config;
+		private IWorldRepository _repository;
 
-		public AppController(IMailService mailService, IConfigurationRoot config)
+		public AppController(IMailService mailService, IConfigurationRoot config, IWorldRepository repository)
 		{
 			_mailService = mailService;
 			_config = config;
+			_repository = repository;
 		}
 
 		public IActionResult Index()
 		{
-			return View();
+			var data = _repository.GetAllTrips();
+			return View(data);
 		}
 
 		public IActionResult Contact()

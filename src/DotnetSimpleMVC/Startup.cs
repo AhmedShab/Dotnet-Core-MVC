@@ -1,8 +1,10 @@
-﻿using DotnetSimpleMVC.Services;
+﻿using DotnetSimpleMVC.Models;
+using DotnetSimpleMVC.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
 
 namespace DotnetSimpleMVC
@@ -33,11 +35,14 @@ namespace DotnetSimpleMVC
 			}
 
 			services.AddMvc();
+			services.AddDbContext<WorldContext>();
 			services.AddSingleton(_config);
+			services.AddTransient<WorldContentSeedData>();
+			services.AddScoped<IWorldRepository, WorldRepository>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-		public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+		public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, WorldContentSeedData seeder)
 		{
 			loggerFactory.AddConsole();
 
@@ -56,6 +61,8 @@ namespace DotnetSimpleMVC
 					defaults: new { Controller = "App", action = "Index" }
 					);
 			});
+
+			seeder.EnsureSeedData().Wait();
 		}
 	}
 }
