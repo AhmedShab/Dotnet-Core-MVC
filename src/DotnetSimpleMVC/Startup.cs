@@ -39,6 +39,7 @@ namespace DotnetSimpleMVC
 			services.AddSingleton(_config);
 			services.AddTransient<WorldContentSeedData>();
 			services.AddScoped<IWorldRepository, WorldRepository>();
+			services.AddLogging();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,7 +50,10 @@ namespace DotnetSimpleMVC
 			if (env.IsDevelopment())
 			{
 				app.UseDeveloperExceptionPage();
+				loggerFactory.AddDebug(LogLevel.Information);
 			}
+
+			loggerFactory.AddDebug(LogLevel.Error);
 
 			app.UseStaticFiles();
 

@@ -20,9 +20,10 @@
     "Microsoft.EntityFrameworkCore": "1.1.2",
 			"Microsoft.EntityFrameworkCore.SqlServer": "1.1.2",
 			"Microsoft.EntityFrameworkCore.Tools": {
-							"version": "1.0.0-preview2-final",
-							"type": "build"
-			}
+				"version": "1.0.0-preview2-final",
+				"type": "build"
+			},
+			"Microsoft.Extensions.Logging.Debug": "1.0.0"
 	},
 
 	"tools": {
